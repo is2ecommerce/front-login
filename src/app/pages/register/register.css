@@ -1,0 +1,609 @@
+.register-container {
+  display: flex;
+  min-height: 100vh;
+  background: #f8f9fa;
+  overflow-x: hidden;
+}
+
+/* Gradient Panel (Left Side) */
+.gradient-panel {
+  flex: 1;
+  background: linear-gradient(135deg, #e47911 0%, #232f3e 25%, #111111 50%, #48a3c6 75%, #007eb9 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+.gradient-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+  text-align: center;
+  max-width: 80%;
+}
+
+.gradient-content h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  animation: slideInDown 0.8s ease-out;
+}
+
+.gradient-content p {
+  font-size: 1.05rem;
+  font-weight: 300;
+  margin: 0 0 2rem 0;
+  opacity: 0.95;
+  animation: slideInUp 0.8s ease-out 0.2s both;
+}
+
+/* Step Indicator */
+.step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0 0 0;
+  animation: slideInUp 0.8s ease-out 0.4s both;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.step span {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.step.active span {
+  background: white;
+  color: #007eb9;
+  box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+.step.completed span {
+  background: #48a3c6;
+  border-color: #48a3c6;
+}
+
+.step p {
+  font-size: 0.85rem;
+  margin: 0;
+  opacity: 0.7;
+}
+
+.step.active p,
+.step.completed p {
+  opacity: 1;
+}
+
+.step-line {
+  width: 40px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 0 0.5rem;
+  transition: background 0.3s ease;
+}
+
+.step-line.completed {
+  background: #48a3c6;
+}
+
+/* Decorative Circles */
+.decorative-circles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+  animation: float 6s ease-in-out infinite;
+}
+
+.circle-1 {
+  width: 200px;
+  height: 200px;
+  background: white;
+  top: -50px;
+  right: -50px;
+  animation-delay: 0s;
+}
+
+.circle-2 {
+  width: 150px;
+  height: 150px;
+  background: white;
+  bottom: 20%;
+  left: 10%;
+  animation-delay: 2s;
+}
+
+.circle-3 {
+  width: 100px;
+  height: 100px;
+  background: white;
+  top: 40%;
+  left: -30px;
+  animation-delay: 4s;
+}
+
+/* Form Panel (Right Side) */
+.form-panel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(to bottom, #ffffff, #f5f7fa);
+  overflow-y: auto;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 500px;
+}
+
+.form-header {
+  margin-bottom: 2rem;
+}
+
+.form-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #232f3e;
+  margin: 0 0 0.5rem 0;
+}
+
+.form-header p {
+  font-size: 0.9rem;
+  color: #999;
+  margin: 0;
+}
+
+/* Error Box */
+.error-box {
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.error-icon {
+  width: 20px;
+  height: 20px;
+  color: #d64d51;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.errors-list {
+  flex: 1;
+}
+
+.errors-list p {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  color: #d64d51;
+}
+
+.errors-list p:first-child {
+  margin-top: 0;
+}
+
+/* Form Styling */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-step {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #232f3e;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 1.2rem;
+  width: 18px;
+  height: 18px;
+  color: #48a3c6;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.85rem 1.2rem 0.85rem 3rem;
+  border: 2px solid #e1e8ed;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #232f3e;
+  background: white;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.form-input::placeholder {
+  color: #999;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #007eb9;
+  box-shadow: 0 0 0 3px rgba(0, 126, 185, 0.1);
+  background: #fafbfc;
+}
+
+.form-input:hover {
+  border-color: #48a3c6;
+}
+
+.form-input:disabled {
+  background: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.password-hint {
+  font-size: 0.8rem;
+  color: #999;
+  margin: 0;
+  margin-top: -0.3rem;
+}
+
+/* Password Visibility Toggle */
+.visibility-toggle {
+  position: absolute;
+  right: 1.2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: #48a3c6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.visibility-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+.visibility-toggle:hover {
+  color: #007eb9;
+}
+
+/* Checkbox Styling */
+.checkbox-group {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.7rem;
+  margin-top: 0.5rem;
+}
+
+.checkbox-input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #007eb9;
+  border-radius: 4px;
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+}
+
+.checkbox-label {
+  font-size: 0.9rem;
+  color: #666;
+  cursor: pointer;
+  user-select: none;
+  line-height: 1.4;
+}
+
+.checkbox-label a {
+  color: #007eb9;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.checkbox-label a:hover {
+  text-decoration: underline;
+}
+
+/* Buttons */
+.button-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.back-button,
+.next-button,
+.submit-button {
+  flex: 1;
+  padding: 0.95rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.back-button {
+  background: #f0f0f0;
+  color: #232f3e;
+  border: 2px solid #e1e8ed;
+}
+
+.back-button:hover {
+  background: #e8e8e8;
+  border-color: #ccc;
+}
+
+.next-button {
+  background: linear-gradient(135deg, #48a3c6 0%, #007eb9 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(72, 163, 198, 0.3);
+}
+
+.next-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(72, 163, 198, 0.4);
+}
+
+.next-button:active {
+  transform: translateY(0);
+}
+
+.submit-button {
+  background: linear-gradient(135deg, #e47911 0%, #ff9900 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(228, 121, 17, 0.3);
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(228, 121, 17, 0.4);
+  background: linear-gradient(135deg, #d67009 0%, #ff8800 100%);
+}
+
+.submit-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submit-button:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.submit-button.loading {
+  background: linear-gradient(135deg, #48a3c6 0%, #007eb9 100%);
+  box-shadow: 0 4px 12px rgba(0, 126, 185, 0.3);
+}
+
+/* Loading Spinner */
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Login Link */
+.login-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.login-link p {
+  color: #666;
+  margin: 0;
+}
+
+.login-link a {
+  color: #007eb9;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.login-link a:hover {
+  color: #e47911;
+  text-decoration: underline;
+}
+
+/* Animations */
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .register-container {
+    flex-direction: column;
+  }
+
+  .gradient-panel {
+    min-height: 300px;
+    padding: 2rem 1.5rem;
+  }
+
+  .gradient-content h1 {
+    font-size: 2rem;
+  }
+
+  .gradient-content p {
+    font-size: 0.95rem;
+  }
+
+  .step-indicator {
+    gap: 0.5rem;
+  }
+
+  .step-line {
+    width: 30px;
+  }
+
+  .step span {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+  }
+
+  .step p {
+    font-size: 0.75rem;
+  }
+
+  .form-panel {
+    padding: 1.5rem;
+  }
+
+  .form-container {
+    max-width: 100%;
+  }
+
+  .circle {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .gradient-content h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .gradient-content p {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .back-button,
+  .next-button,
+  .submit-button {
+    width: 100%;
+  }
+}
