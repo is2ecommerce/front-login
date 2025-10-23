@@ -1,0 +1,52 @@
+<!-- user-profile.component.html -->
+
+<!-- Mostramos el perfil solo si 'usuario' está definido -->
+<div *ngIf="usuario; else cargando" class="user-profile">
+  <div class="profile-card">
+    <div class="profile-info">
+      <img [src]="usuario.imagen" alt="Foto de perfil" />
+      <div class="text">
+        <h2>{{ usuario.nombre }}</h2>
+        <p>{{ usuario.email }}</p>
+        <p>Miembro desde {{ usuario.miembroDesde | date:'MMMM yyyy' }}</p>
+      </div>
+    </div>
+    <button class="edit-btn" (click)="editarPerfil()">Editar perfil</button>
+  </div>
+
+  <div class="info-section">
+    <div class="card">
+      <h3>Dirección principal</h3>
+      <p>{{ usuario.direccion }}</p>
+      <p>{{ usuario.ciudad }}, {{ usuario.departamento }}, {{ usuario.pais }}</p>
+      <a href="#" (click)="editarDireccion()">Editar dirección</a>
+    </div>
+
+    <div class="card">
+      <h3>Métodos de pago</h3>
+      <p>{{ usuario.metodoPago }}</p>
+      <a href="#" (click)="administrarPagos()">Administrar pagos</a>
+    </div>
+  </div>
+
+  <div class="orders">
+    <h3>Historial de pedidos</h3>
+
+    <div class="order" *ngFor="let pedido of usuario.pedidos">
+      <span>Pedido #{{ pedido.id }} — {{ pedido.articulos }} artículos</span>
+      <span>Entregado el {{ pedido.fechaEntrega | date:'d MMM yyyy' }}</span>
+    </div>
+
+    <a href="#">Ver todos los pedidos</a>
+  </div>
+</div>
+
+<!-- Template alternativo mientras se carga o si no hay datos -->
+<ng-template #cargando>
+  <div class="loading-container">
+    <p>⚠️ No se pudo conectar al backend, usando datos locales...</p>
+    <p>Cargando perfil de usuario...</p>
+  </div>
+</ng-template>
+
+
