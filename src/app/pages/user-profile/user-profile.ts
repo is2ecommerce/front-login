@@ -1,11 +1,11 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { CommonModule, DatePipe, NgFor } from '@angular/common';
+import { CommonModule, DatePipe, NgFor, NgIf } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-profile',
   standalone: true,
-  imports: [CommonModule, DatePipe, NgFor, HttpClientModule],
+  imports: [CommonModule, DatePipe, NgFor, NgIf, HttpClientModule],
   templateUrl: './user-profile.html',
   styleUrls: ['./user-profile.css']
 })
@@ -24,7 +24,7 @@ export class UserProfile implements OnInit {
     this.http.get<any>('http://localhost:8080/api/usuarios/1').subscribe({
       next: (data) => {
         this.usuario = {
-          imagen: data.imagen || 'assets/img/user.png',
+          imagen: data.imagen || 'https://previews.123rf.com/images/yupiramos/yupiramos1705/yupiramos170514531/77987158-young-man-profile-icon-vector-illustration-graphic-design.jpg',
           nombre: data.nombre,
           email: data.email,
           miembroDesde: data.fechaRegistro,
@@ -49,7 +49,7 @@ export class UserProfile implements OnInit {
 
   datosMock() {
     return {
-      imagen: 'assets/img/user.png',
+      imagen: 'https://previews.123rf.com/images/yupiramos/yupiramos1705/yupiramos170514531/77987158-young-man-profile-icon-vector-illustration-graphic-design.jpg',
       nombre: 'Usuario de Prueba',
       email: 'usuario@demo.com',
       miembroDesde: new Date('2024-01-01'),
@@ -68,6 +68,7 @@ export class UserProfile implements OnInit {
   editarPerfil(): void { console.log('Editar perfil'); }
   editarDireccion(): void { console.log('Editar dirección'); }
   administrarPagos(): void { console.log('Administrar pagos'); }
+  cambiarContrasena(): void { console.log('Cambiar contraseña'); }
 }
 
 

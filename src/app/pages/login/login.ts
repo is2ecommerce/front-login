@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +17,8 @@ export class LoginComponent {
   isLoading = signal(false);
   showPassword = signal(false);
 
+  constructor(private router: Router) {}
+
   onSubmit() {
     if (this.email() && this.password()) {
       this.isLoading.set(true);
@@ -28,7 +30,8 @@ export class LoginComponent {
           rememberMe: this.rememberMe()
         });
         this.isLoading.set(false);
-        // Aquí iría la navegación al dashboard después del login exitoso
+        // Redirigir al perfil después del login exitoso
+        this.router.navigate(['/profile']);
       }, 1500);
     }
   }

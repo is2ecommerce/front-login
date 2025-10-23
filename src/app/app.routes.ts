@@ -14,12 +14,12 @@ export const routes: Routes = [
     component: RegisterComponent
   },
   {
+    path: 'profile',
+    component: UserProfile
+  },
+  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
-  },
-  { 
-    path: 'perfil',
-     component: UserProfile 
-    }
+  }
 ];

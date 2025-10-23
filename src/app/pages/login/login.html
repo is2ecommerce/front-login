@@ -32,11 +32,11 @@
             <input
               type="email"
               id="email"
-              name="email"
               class="form-input"
               placeholder="correo@ejemplo.com"
-              [(ngModel)]="email"
+              [ngModel]="email()"
               (ngModelChange)="email.set($event)"
+              name="email"
               required
             />
           </div>
@@ -53,11 +53,11 @@
             <input
               [type]="showPassword() ? 'text' : 'password'"
               id="password"
-              name="password"
               class="form-input"
               placeholder="••••••••"
-              [(ngModel)]="password"
+              [ngModel]="password()"
               (ngModelChange)="password.set($event)"
+              name="password"
               required
             />
             <button
@@ -83,10 +83,10 @@
           <input
             type="checkbox"
             id="remember"
-            name="remember"
             class="checkbox-input"
-            [(ngModel)]="rememberMe"
+            [ngModel]="rememberMe()"
             (ngModelChange)="rememberMe.set($event)"
+            name="remember"
           />
           <label for="remember" class="checkbox-label">Recuérdame en este dispositivo</label>
         </div>
