@@ -1,0 +1,22 @@
+# Development Dockerfile for running the Angular dev server inside a container
+# This mirrors running `ng serve` locally. Not intended for production.
+
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install dependencies (including devDependencies needed by ng serve)
+COPY package.json package-lock.json* ./
+RUN npm ci
+
+# Copy source files
+COPY . .
+
+# Expose the dev server port
+EXPOSE 4200
+
+# Use environment suited for development
+ENV NODE_ENV=development
+
+# Start the Angular dev server, listen on all interfaces so container port mapping works
+CMD ["npm", "run", "start", "--", "--host", "0.0.0.0", "--port", "4200"]

@@ -195,8 +195,41 @@
 }
 
 /* ========================================
-   CONTENIDO PRINCIPAL
+   BOTÓN LOGOUT
    ======================================== */
+
+.btn-logout {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.6rem;
+  background-color: #ffffff;
+  color: #e47911;
+  border: 2px solid #e47911;
+  border-radius: var(--border-radius);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: var(--transition);
+}
+
+.btn-logout svg {
+  width: 20px;
+  height: 20px;
+}
+
+.btn-logout:hover {
+  background: linear-gradient(135deg, #e47911 0%, #ff9900 100%);
+  color: var(--color-white);
+  border-color: #e47911;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(228, 121, 17, 0.3);
+}
+
+.btn-logout:active {
+  transform: translateY(0);
+}
 
 .profile-content {
   max-width: 1200px;

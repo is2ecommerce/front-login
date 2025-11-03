@@ -54,6 +54,65 @@ ng e2e
 
 Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
-## Additional Resources
+Docker — cómo arrancar desde Docker
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Producción (SSR)
+
+Construir imagen:
+
+```bash
+docker build -t front-login-profile:latest .
+```
+
+Arrancar contenedor (puerto 4000):
+
+```bash
+docker run --rm -p 4000:4000 --name front-login-profile front-login-profile:latest
+```
+
+Si usas otro puerto:
+
+```bash
+docker run -e PORT=8080 -p 8080:8080 front-login-profile:latest
+```
+
+Desarrollo (ng serve)
+
+Construir imagen dev:
+
+```bash
+docker build -f Dockerfile.dev -t front-login-profile:dev .
+```
+
+Arrancar contenedor dev (puerto 4200):
+
+```bash
+docker run --rm -p 4200:4200 --name front-login-profile-dev front-login-profile:dev
+```
+
+Con live-reload (montar volumen):
+
+```bash
+docker run --rm -p 4200:4200 \
+	-v "$(pwd)":/app \
+	-v /app/node_modules \
+	--name front-login-profile-dev front-login-profile:dev
+```
+
+Comandos útiles
+
+```bash
+docker images                         # listar imágenes
+docker image rm front-login-profile:dev  # borrar imagen dev
+docker tag front-login-profile:dev front-login-profile:latest  # retag
+docker ps -a --format 'table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}'  # contenedores
+docker logs -f <container-name-or-id>  # ver logs
+```
+
+Si el puerto está ocupado:
+
+```bash
+sudo ss -ltnp 'sport = :4200' || sudo lsof -i :4200
+docker stop <container-id-or-name>
+docker rm <container-id-or-name>
+```

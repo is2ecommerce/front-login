@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule, DatePipe, NgFor, NgIf } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -14,7 +15,7 @@ export class UserProfile implements OnInit {
   usuario: any;
   cargando = true;
 
-  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
+  constructor(private http: HttpClient, private cdr: ChangeDetectorRef, private router: Router) {}
 
   ngOnInit(): void {
     this.cargarUsuario();
@@ -69,6 +70,14 @@ export class UserProfile implements OnInit {
   editarDireccion(): void { console.log('Editar dirección'); }
   administrarPagos(): void { console.log('Administrar pagos'); }
   cambiarContrasena(): void { console.log('Cambiar contraseña'); }
+  
+  cerrarSesion(): void {
+    console.log('Cerrando sesión...');
+    // Aquí iría la lógica para limpiar token/sesión si la hay
+    // localStorage.removeItem('token');
+    // sessionStorage.clear();
+    this.router.navigate(['/login']);
+  }
 }
 
 
