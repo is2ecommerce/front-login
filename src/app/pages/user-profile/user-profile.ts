@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule, DatePipe, NgFor, NgIf } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { EnvironmentService } from '../../services/environment.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -15,15 +16,25 @@ export class UserProfile implements OnInit {
   usuario: any;
   cargando = true;
 
-  constructor(private http: HttpClient, private cdr: ChangeDetectorRef, private router: Router) {}
+  constructor(
+    private http: HttpClient, 
+    private cdr: ChangeDetectorRef, 
+    private router: Router,
+    private env: EnvironmentService
+  ) {}
 
   ngOnInit(): void {
     this.cargarUsuario();
   }
 
   cargarUsuario(): void {
-    this.http.get<any>('http://localhost:8080/api/usuarios/1').subscribe({
+    // Usar el servicio de entorno para obtener la URL del API
+    const apiEndpoint = this.env.getApiEndpoint('/usuarios/1');
+    this.env.log('Cargando usuario desde:', apiEndpoint);
+    
+    this.http.get<any>(apiEndpoint).subscribe({
       next: (data) => {
+        this.env.log('Usuario cargado exitosamente:', data);
         this.usuario = {
           imagen: data.imagen || 'https://previews.123rf.com/images/yupiramos/yupiramos1705/yupiramos170514531/77987158-young-man-profile-icon-vector-illustration-graphic-design.jpg',
           nombre: data.nombre,
@@ -37,13 +48,14 @@ export class UserProfile implements OnInit {
           pedidos: data.pedidos || []
         };
         this.cargando = false;
-        this.cdr.detectChanges(); // 👈 Forzar actualización del DOM
+        this.cdr.detectChanges();
       },
       error: (err) => {
+        this.env.log('⚠️ Error al conectar con el backend:', err);
         console.warn('⚠️ No se pudo conectar al backend, usando datos locales...');
         this.usuario = this.datosMock();
         this.cargando = false;
-        this.cdr.detectChanges(); // 👈 Arregla el ExpressionChangedAfterItHasBeenCheckedError
+        this.cdr.detectChanges();
       }
     });
   }

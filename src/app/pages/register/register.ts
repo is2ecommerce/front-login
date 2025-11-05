@@ -1,7 +1,8 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
+import { EnvironmentService } from '../../services/environment.service';
 
 @Component({
   selector: 'app-register',
@@ -11,6 +12,11 @@ import { RouterLink } from '@angular/router';
   styleUrl: './register.css'
 })
 export class RegisterComponent {
+  
+  constructor(
+    private env: EnvironmentService,
+    private router: Router
+  ) {}
   // Personal Data
   firstName = signal('');
   lastName = signal('');
@@ -119,21 +125,51 @@ export class RegisterComponent {
     if (this.validateAccountData()) {
       this.isLoading.set(true);
       
+      // Log usando el servicio de entorno (solo en desarrollo)
+      this.env.log('Registration attempt:', {
+        firstName: this.firstName(),
+        lastName: this.lastName(),
+        email: this.email(),
+        phone: this.phone(),
+        address: this.address(),
+        city: this.city(),
+        state: this.state(),
+        zipCode: this.zipCode(),
+        country: this.country(),
+        apiUrl: this.env.apiUrl
+      });
+      
+      // TODO: Descomentar cuando el backend esté listo
+      // const registerEndpoint = this.env.getApiEndpoint('/auth/register');
+      // this.authService.register({
+      //   firstName: this.firstName(),
+      //   lastName: this.lastName(),
+      //   email: this.email(),
+      //   phone: this.phone(),
+      //   address: this.address(),
+      //   city: this.city(),
+      //   state: this.state(),
+      //   zipCode: this.zipCode(),
+      //   country: this.country(),
+      //   password: this.password()
+      // }).subscribe({
+      //   next: (response) => {
+      //     this.isLoading.set(false);
+      //     this.env.log('Registration successful:', response);
+      //     this.router.navigate(['/login']);
+      //   },
+      //   error: (error) => {
+      //     this.isLoading.set(false);
+      //     this.env.log('Registration error:', error);
+      //     this.errors.set(['Error al registrar. Intenta nuevamente.']);
+      //   }
+      // });
+      
       // Simulate registration process
       setTimeout(() => {
-        console.log('Registration with:', {
-          firstName: this.firstName(),
-          lastName: this.lastName(),
-          email: this.email(),
-          phone: this.phone(),
-          address: this.address(),
-          city: this.city(),
-          state: this.state(),
-          zipCode: this.zipCode(),
-          country: this.country()
-        });
         this.isLoading.set(false);
-        // Aquí iría la navegación al dashboard después del registro exitoso
+        this.env.log('Registro simulado exitoso');
+        this.router.navigate(['/login']);
       }, 1500);
     }
   }

@@ -2,6 +2,28 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.1.
 
+## Inicio Rápido
+
+Para empezar a trabajar con el proyecto:
+
+```bash
+# Instalar dependencias
+npm install
+
+# Iniciar servidor de desarrollo
+npm start
+```
+
+La aplicación estará disponible en `http://localhost:4200/`
+
+## Documentación
+
+Para información detallada sobre la configuración y uso del proyecto, consulta:
+
+- **QUICKSTART.md** - Guía rápida de inicio y comandos útiles
+- **CONFIGURACION_VARIABLES.md** - Documentación completa sobre variables de entorno
+- **PASOS_COMPLETADOS.md** - Detalle de la implementación y cambios realizados
+
 ## Development server
 
 To start a local development server, run:
@@ -116,3 +138,5 @@ sudo ss -ltnp 'sport = :4200' || sudo lsof -i :4200
 docker stop <container-id-or-name>
 docker rm <container-id-or-name>
 ```
+
+
