@@ -1,10 +1,27 @@
-# FrontLoginProfile
+# FrontLoginProfile - Integración con Keycloak
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.1.
+Aplicación de login personalizada que se integra con Keycloak para autenticación sin usar la interfaz estándar de Keycloak.
 
-## Inicio Rápido
+## 🚀 Inicio Rápido
 
-Para empezar a trabajar con el proyecto:
+### 1. Levantar Keycloak
+
+```bash
+cd c:\Github\identity-server
+docker-compose up -d
+```
+
+### 2. Configurar Keycloak
+
+Acceder a http://localhost:8080/admin (admin/admin) y:
+
+1. Crear realm `ecommerce`
+2. Crear cliente `frontend-client` con **Direct Access Grants** habilitado
+3. Crear usuario de prueba con contraseña
+
+**📚 Ver guía completa**: [`KEYCLOAK_INTEGRATION.md`](./KEYCLOAK_INTEGRATION.md)
+
+### 3. Instalar y Ejecutar
 
 ```bash
 # Instalar dependencias
@@ -14,15 +31,24 @@ npm install
 npm start
 ```
 
-La aplicación estará disponible en `http://localhost:4200/`
+La aplicación estará disponible en `http://localhost:4200/` (o puerto 3000 si lo configuras)
 
-## Documentación
+## 🔐 Login con Keycloak
+
+- ✅ Login personalizado sin interfaz de Keycloak
+- ✅ Validación contra base de datos interna de Keycloak  
+- ✅ JWT tokens automáticos
+- ✅ Redirección a catálogo después del login
+- ✅ Interceptor HTTP para peticiones autenticadas
+
+## 📚 Documentación
 
 Para información detallada sobre la configuración y uso del proyecto, consulta:
 
-- **QUICKSTART.md** - Guía rápida de inicio y comandos útiles
-- **CONFIGURACION_VARIABLES.md** - Documentación completa sobre variables de entorno
-- **PASOS_COMPLETADOS.md** - Detalle de la implementación y cambios realizados
+- **[KEYCLOAK_INTEGRATION.md](./KEYCLOAK_INTEGRATION.md)** - 🔑 Guía completa de integración con Keycloak
+- **[QUICKSTART.md](./QUICKSTART.md)** - Guía rápida de inicio y comandos útiles
+- **[CONFIGURACION_VARIABLES.md](./CONFIGURACION_VARIABLES.md)** - Variables de entorno
+- **[PASOS_COMPLETADOS.md](./PASOS_COMPLETADOS.md)** - Detalle de la implementación
 
 ## Development server
 
